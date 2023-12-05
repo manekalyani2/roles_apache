@@ -1,0 +1,26 @@
+---
+# tasks file for newrole
+  - name: Install apcahe on redhat family
+    dnf: 
+      name: "{{mydict.get(ansible_facts['os_family'])}}"
+      state: present
+      update_cache: yes
+    when: ansible_facts['os_family'] == "RedHat"
+    # all variables can be used directly in conditionals without double curly braces
+  - name: Install apcahe on debian family
+    apt: 
+      name: "{{mydict.get(ansible_facts['os_family'])}}"
+      state: present
+      update_cache: yes
+    when: ansible_facts['os_family'] == "Debian"
+  - name: index.html
+    template:
+      src: "index.j2"
+      dest: /var/www/html/index.html
+    notify: ensure apache started
+      
+        
+        
+        
+        
+

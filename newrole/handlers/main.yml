@@ -1,0 +1,7 @@
+---
+# handlers file for newrole
+  - name: ensure apache started
+    service: 
+      name: "{{mydict.get(ansible_facts['os_family'])}}" 
+      state: started 
+    become: yes
